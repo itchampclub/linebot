@@ -18,8 +18,8 @@ fwrite($myfile, $txt);
 fclose($myfile);
 
 $api_key="raGvU0tka_kLPSFwL7ObSQKwZGR-91G2";
-$url = 'https://api.mlab.com/api/1/databases/itbot/collections/linebot?apiKey='.$api_key.'';
-$json = file_get_contents('https://api.mlab.com/api/1/databases/itbot/collections/linebot?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
+$url = 'https://api.mlab.com/api/1/databases/esp32/collections/linebot?apiKey='.$api_key.'';
+$json = file_get_contents('https://api.mlab.com/api/1/databases/esp32/collections/linebot?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
 $data = json_decode($json);
 $isData=sizeof($data);
 if (strpos($_msg, '@') !== false) {
