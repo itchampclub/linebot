@@ -11,7 +11,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "UPDATE esp32 SET command='closed' WHERE id=1";
+$sql = "UPDATE esp32 SET command='opend' WHERE id=1";
 
 if ($conn->query($sql) === TRUE) {
     echo "Record updated successfully";
