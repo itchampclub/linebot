@@ -4,7 +4,7 @@ $myfile = fopen("esp32.txt", "w+") or die("Unable to open file!");
 
 $txt = " . date("h:i:sa") . ";
 fwrite($myfile, $txt);
-newt_delay(10000)
+newt_delay(1000)
 echo fread($myfile,filesize("esp32.txt"));
 fclose($myfile);
 ?>
