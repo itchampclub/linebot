@@ -6,16 +6,15 @@ $content = file_get_contents('php://input');
 $arrJson = json_decode($content, true);
 
 $strUrl = "https://api.line.me/v2/bot/message/reply";
-
+$_userId = $arrJson['events'][0]['source']['userId'];
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
 $_msg = $arrJson['events'][0]['message']['text'];
 
-$myfile = fopen('esp32.txt', "w+") or die("Unable to open file!");
+$myfile = fopen(''.$_userId.'.txt', "x+") or die("Unable to open file!");
 fwrite($myfile, $_msg);
 fclose($myfile);
-$_userId = $arrJson['events'][0]['source']['userId'];
 $api_key="raGvU0tka_kLPSFwL7ObSQKwZGR-91G2";
 $url = 'https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'';
 $json = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"userId":"'.$_userId.'"}');
