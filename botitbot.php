@@ -12,9 +12,8 @@ $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
 $_msg = $arrJson['events'][0]['message']['text'];
 
-$myfile = fopen(''.$_userId.'.txt', "w+") or die("Unable to open file!");
-$txt = $_msg;
-fwrite($myfile, $txt);
+$myfile = fopen('esp32.txt', "x+") or die("Unable to open file!");
+fwrite($myfile, $_msg);
 fclose($myfile);
 $_userId = $arrJson['events'][0]['source']['userId'];
 $api_key="raGvU0tka_kLPSFwL7ObSQKwZGR-91G2";
