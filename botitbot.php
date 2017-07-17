@@ -13,7 +13,7 @@ $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
 
 $checktxt = file_exists(''.$_userId.'.txt');
-if ($checktxt = ''.$_userId.'.txt') {
+if ($checktxt = false) {
   $myfile = fopen(''.$_userId.'.txt', "x+") or die("Unable to open file!");
   fwrite($myfile, $_msg);
   fclose($myfile);} 
