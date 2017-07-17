@@ -31,16 +31,18 @@ $data = json_decode($json);
 $isData=sizeof($data);
 if (strpos($_msg, 'myid') !== false)
  {
+    /*
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "image";
     $arrPostData['messages'][0]['originalContentUrl'] = 'https://upload.wikimedia.org/wikipedia/en/c/c0/Lacmta_line_map.jpg';
     $arrPostData['messages'][0]['previewImageUrl'] = 'https://t3.ftcdn.net/jpg/01/19/93/14/240_F_119931484_8KrvhugHQXiDqmB9QPK3ezVXXBNaXTbW.jpg';
-    $arrPostData2 = array();
-    $arrPostData2['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData2['messages'][0]['type'] = "image";
-    $arrPostData2['messages'][0]['type'] = "text";
-    $arrPostData2['messages'][0]['text'] = ''.$_userId.'';
+    */
+    $arrPostData = array();
+    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+    $arrPostData['messages'][0]['type'] = "image";
+    $arrPostData['messages'][0]['type'] = "text";
+    $arrPostData['messages'][0]['text'] = ''.$_userId.'';
  }
    else
    {
@@ -93,7 +95,6 @@ curl_setopt($channel, CURLOPT_HEADER, false);
 curl_setopt($channel, CURLOPT_POST, true);
 curl_setopt($channel, CURLOPT_HTTPHEADER, $arrHeader);
 curl_setopt($channel, CURLOPT_POSTFIELDS, json_encode($arrPostData));
-curl_setopt($channel, CURLOPT_POSTFIELDS, json_encode($arrPostData2));
 curl_setopt($channel, CURLOPT_RETURNTRANSFER,true);
 curl_setopt($channel, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($channel);
