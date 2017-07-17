@@ -16,7 +16,7 @@ fwrite($myfile, $_msg);
 fclose($myfile);
 $api_key="raGvU0tka_kLPSFwL7ObSQKwZGR-91G2";
 $url = 'https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'';
-$json = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"userId":"'.$_userId.'"}');
+$json = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"userId":"'.$_userId.'","question":"'.$_msg.'"}');
 $data = json_decode($json);
 $isData=sizeof($data);
 if (strpos($_msg, '@') !== false) {
