@@ -47,7 +47,7 @@ if (strpos($_msg, '@') !== false) {
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'รับทราบจ้า';
+    $arrPostData['messages'][0]['text'] = "รับทราบจ้า ID".$arrJson['events'][0]['source']['userId'];
   }
 }else{
   if($isData >0){
