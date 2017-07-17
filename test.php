@@ -2,12 +2,12 @@
 $checktxt = file_exists("esp32t.txt");
 $_msg = 555
 $_msg2 = 666
-if ($checktxt = 0) {
-  $myfile = fopen('esp32t.txt', "x+") or die("Unable to open file!");
+if ($checktxt = 1) {
+  $myfile = fopen('esp32t.txt', "w+") or die("Unable to open file!");
   fwrite($myfile, $_msg);
   fclose($myfile);} 
 else {
-  $myfile = fopen('esp32t.txt', "w+") or die("Unable to open file!");
+  $myfile = fopen('esp32t.txt', "x+") or die("Unable to open file!");
   fwrite($myfile, $_msg2);
   fclose($myfile);} 
 }
