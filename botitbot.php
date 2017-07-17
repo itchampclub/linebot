@@ -36,6 +36,9 @@ if (strpos($_msg, 'myid') !== false)
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
     $arrPostData['messages'][0]['text'] = ''.$_userId.'+'.$_displayName.'';
+    $arrPostData['messages'][0]['type'] = "image";
+    $arrPostData['messages'][0]['originalContentUrl'] = 'https://upload.wikimedia.org/wikipedia/en/c/c0/Lacmta_line_map.jpg';
+    $arrPostData['messages'][0]['previewImageUrl'] = 'https://t3.ftcdn.net/jpg/01/19/93/14/240_F_119931484_8KrvhugHQXiDqmB9QPK3ezVXXBNaXTbW.jpg';
  }
    else
    {
