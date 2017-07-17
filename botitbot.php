@@ -11,9 +11,18 @@ $_msg = $arrJson['events'][0]['message']['text'];
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
-$myfile = fopen(''.$_userId.'.txt', "x+") or die("Unable to open file!");
-fwrite($myfile, $_msg);
-fclose($myfile);
+
+$checktxt = file_exists(''.$_userId.'.txt');
+if ($checktxt = ''.$_userId.'.txt') {
+  $myfile = fopen(''.$_userId.'.txt', "x+") or die("Unable to open file!");
+  fwrite($myfile, $_msg);
+  fclose($myfile);} 
+else {
+  $myfile = fopen(''.$_userId.'.txt', "w+") or die("Unable to open file!");
+  fwrite($myfile, $_msg);
+  fclose($myfile);} 
+}
+
 $api_key="raGvU0tka_kLPSFwL7ObSQKwZGR-91G2";
 $url = 'https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'';
 $json = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"userId":"'.$_userId.'","question":"'.$_msg.'"}');
