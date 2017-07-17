@@ -29,7 +29,6 @@ $json = file_get_contents('https://api.mlab.com/api/1/databases/byone/collection
 $data = json_decode($json);
 $isData=sizeof($data);
 if (strpos($_msg, '@') !== false) {
-  if (strpos($_msg, '@') !== false) {
     $x_tra = str_replace("@","", $_msg);
     $pieces = explode("&", $x_tra);
     $_question=str_replace("","",$pieces[0]);
@@ -55,7 +54,6 @@ if (strpos($_msg, '@') !== false) {
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
     $arrPostData['messages'][0]['text'] = 'รับทราบจ้า';
-  }
 }else{
   if($isData >0){
    foreach($data as $rec){
