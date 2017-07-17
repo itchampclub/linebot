@@ -11,6 +11,7 @@ $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
 $_msg = $arrJson['events'][0]['message']['text'];
+$_userId = $arrJson['events'][0]['source']['userId'];
 
 $myfile = fopen("esp32.txt", "w+") or die("Unable to open file!");
 $txt = $_msg;
@@ -18,9 +19,11 @@ fwrite($myfile, $txt);
 fclose($myfile);
 
 $api_key="raGvU0tka_kLPSFwL7ObSQKwZGR-91G2";
-$url = 'https://api.mlab.com/api/1/databases/esp32/collections/linebot?apiKey='.$api_key.'';
-$json = file_get_contents('https://api.mlab.com/api/1/databases/esp32/collections/linebot?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
+$url = 'https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'';
+$json = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
+$json_ans = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"userId":"'.$_userId.'"}');
 $data = json_decode($json);
+$data_ans = json_decode($json_ans);
 $isData=sizeof($data);
 if (strpos($_msg, '@') !== false) {
   if (strpos($_msg, '@') !== false) {
@@ -33,6 +36,7 @@ if (strpos($_msg, '@') !== false) {
       array(
         'question' => $_question,
         'answer'=> $_answer
+        'userId'=> $_userId
       )
     );
     $opts = array(
@@ -47,7 +51,7 @@ if (strpos($_msg, '@') !== false) {
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = "รับทราบจ้า ID".$arrJson['events'][0]['source']['userId'];
+    $arrPostData['messages'][0]['text'] = "รับทราบจ้า"
   }
 }else{
   if($isData >0){
