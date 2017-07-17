@@ -20,10 +20,8 @@ fclose($myfile);
 
 $api_key="raGvU0tka_kLPSFwL7ObSQKwZGR-91G2";
 $url = 'https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'';
-$json = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
-$json_ans = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"userId":"'.$_userId.'"}');
+$json = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"_userId":"'.$_userId.'"}');
 $data = json_decode($json);
-$data_ans = json_decode($json_ans);
 $isData=sizeof($data);
 if (strpos($_msg, '@') !== false) {
   if (strpos($_msg, '@') !== false) {
