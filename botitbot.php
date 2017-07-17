@@ -8,7 +8,6 @@ $arrJson = json_decode($content, true);
 $strUrl = "https://api.line.me/v2/bot/message/reply";
 $_userId = $arrJson['events'][0]['source']['userId'];
 $_msg = $arrJson['events'][0]['message']['text'];
-$_displayName = $arrJson['events'][0]['userId']['displayName'];
 
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
@@ -34,11 +33,11 @@ if (strpos($_msg, 'myid') !== false)
  {
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = ''.$_userId.'+'.$_displayName.'';
     $arrPostData['messages'][0]['type'] = "image";
     $arrPostData['messages'][0]['originalContentUrl'] = 'https://upload.wikimedia.org/wikipedia/en/c/c0/Lacmta_line_map.jpg';
     $arrPostData['messages'][0]['previewImageUrl'] = 'https://t3.ftcdn.net/jpg/01/19/93/14/240_F_119931484_8KrvhugHQXiDqmB9QPK3ezVXXBNaXTbW.jpg';
+    $arrPostData['messages'][0]['type'] = "text";
+    $arrPostData['messages'][0]['text'] = ''.$_userId.'';
  }
    else
    {
