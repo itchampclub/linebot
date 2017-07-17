@@ -7,11 +7,10 @@ $arrJson = json_decode($content, true);
 
 $strUrl = "https://api.line.me/v2/bot/message/reply";
 $_userId = $arrJson['events'][0]['source']['userId'];
+$_msg = $arrJson['events'][0]['message']['text'];
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
-$_msg = $arrJson['events'][0]['message']['text'];
-
 $myfile = fopen(''.$_userId.'.txt', "x+") or die("Unable to open file!");
 fwrite($myfile, $_msg);
 fclose($myfile);
