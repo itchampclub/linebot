@@ -8,7 +8,7 @@ $arrJson = json_decode($content, true);
 $strUrl = "https://api.line.me/v2/bot/message/reply";
 $_userId = $arrJson['events'][0]['source']['userId'];
 $_msg = $arrJson['events'][0]['message']['text'];
-$_displayName = $arrJson['events'][0]['source']['displayName'];
+$_displayName = $arrJson['events'][0]['userId']['displayName'];
 
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
