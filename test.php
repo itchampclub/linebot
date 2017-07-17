@@ -1,8 +1,13 @@
 <?php
-$filename = 'esp32t.txt';
+$filename = 'aa.txt';
+$_msg = 'aabb';
 if (file_exists($filename)) {
-    echo "The file $filename exists";
+  $myfile = fopen('aa.txt', "w+") or die("Unable to open file!");
+  fwrite($myfile, $_msg);
+  fclose($myfile);}     
 } else {
-    echo "The file $filename does not exist";
+  $myfile = fopen('aa.txt', "x+") or die("Unable to open file!");
+  fwrite($myfile, $_msg);
+  fclose($myfile);     
 }
 ?>
