@@ -18,17 +18,11 @@ if (file_exists($filename)) {
   $myfile = fopen(''.$_userId.'.txt', "w+") or die("Unable to open file!");
   fwrite($myfile, $_msg);
   sleep(15);
-  $myfile1 = fopen(''.$_userId.'.txt', "w+") or die("Unable to open file!");
-  fwrite($myfile1, $_msg1);
-  fclose($myfile1);
 } else {
   $myfile = fopen(''.$_userId.'.txt', "x+") or die("Unable to open file!");
   fwrite($myfile, $_msg);
   fclose($myfile);
   sleep(15);
-  $myfile1 = fopen(''.$_userId.'.txt', "x+") or die("Unable to open file!");
-  fwrite($myfile1, $_msg1);
-  fclose($myfile1);
 }
 
 
