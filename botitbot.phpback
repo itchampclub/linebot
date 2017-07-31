@@ -8,12 +8,10 @@ $arrJson = json_decode($content, true);
 $strUrl = "https://api.line.me/v2/bot/message/reply";
 $_userId = $arrJson['events'][0]['source']['userId'];
 $_msg = $arrJson['events'][0]['message']['text'];
-
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
 $filename = ''.$_userId.'.txt';
-$_msg1 = "success"
 if (file_exists($filename)) {
   $myfile = fopen(''.$_userId.'.txt', "w+") or die("Unable to open file!");
   fwrite($myfile, $_msg);
@@ -30,29 +28,12 @@ $url = 'https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.
 $json = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"userId":"'.$_userId.'","question":"'.$_msg.'"}');
 $data = json_decode($json);
 $isData=sizeof($data);
-if (strpos($_msg, 'myid') !== false)
- {
-    /*
-    $arrPostData = array();
-    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData['messages'][0]['type'] = "image";
-    $arrPostData['messages'][0]['originalContentUrl'] = 'https://upload.wikimedia.org/wikipedia/en/c/c0/Lacmta_line_map.jpg';
-    $arrPostData['messages'][0]['previewImageUrl'] = 'https://t3.ftcdn.net/jpg/01/19/93/14/240_F_119931484_8KrvhugHQXiDqmB9QPK3ezVXXBNaXTbW.jpg';
-    */
-    $arrPostData = array();
-    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData['messages'][0]['type'] = "image";
-    $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = ''.$_userId.'';
- }
-   else
-   {
-      if (strpos($_msg, '@') !== false) {
+if (strpos($_msg, '@') !== false) {
     $x_tra = str_replace("@","", $_msg);
     $pieces = explode("&", $x_tra);
     $_question=str_replace("","",$pieces[0]);
     $_answer=str_replace("","",$pieces[1]);
-      //Post New Data
+    //Post New Data
     $newData = json_encode(
       array(
         'userId' => $_userId,
@@ -73,8 +54,8 @@ if (strpos($_msg, 'myid') !== false)
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
     $arrPostData['messages'][0]['text'] = 'รับทราบจ้า';
-     }else{
-       if($isData >0){
+}else{
+  if($isData >0){
    foreach($data as $rec){
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
@@ -86,9 +67,9 @@ if (strpos($_msg, 'myid') !== false)
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
     $arrPostData['messages'][0]['text'] = 'บอทไม่รู้ วิธีสอนพิมพ์: @คำถาม&คำตอบ';
-    }
   }
 }
+
 
 $channel = curl_init();
 curl_setopt($channel, CURLOPT_URL,$strUrl);
@@ -100,4 +81,9 @@ curl_setopt($channel, CURLOPT_RETURNTRANSFER,true);
 curl_setopt($channel, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($channel);
 curl_close ($channel);
+
+sleep(15);
+  $myfile = fopen(''.$_userId.'.txt', "w+") or die("Unable to open file!");
+  fwrite($myfile, $_msg1);
+  fclose($myfile);
 ?>
