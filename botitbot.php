@@ -82,7 +82,7 @@ curl_setopt($channel, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($channel);
 curl_close ($channel);
 
-sleep(15);
+sleep(8);
   $myfile = fopen(''.$_userId.'.txt', "w+") or die("Unable to open file!");
   fwrite($myfile, $_msg1);
   fclose($myfile);
