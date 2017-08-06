@@ -43,14 +43,14 @@ if (strpos($_msg, '@') !== false) {
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'รับทราบจ้า';
+    $arrPostData['messages'][0]['text'] = 'Save';
 }else{
   if($isData >0){
    foreach($data as $rec){
-    $arrPostData = array();
+   /* $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = $rec->answer;
+    $arrPostData['messages'][0]['text'] = $rec->answer;*/
    }
   }else{
         $newData = json_encode(
@@ -81,7 +81,7 @@ curl_setopt($channel, CURLOPT_RETURNTRANSFER,true);
 curl_setopt($channel, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($channel);
 curl_close ($channel);
-sleep(1);
+sleep(3);
 if (file_exists($filename)) {
   $myfile = fopen(''.$_userId.'.txt', "w+") or die("Unable to open file!");
   fwrite($myfile, $_msg);
