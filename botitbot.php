@@ -12,15 +12,6 @@ $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
 $filename = ''.$_userId.'.txt';
-if (file_exists($filename)) {
-  $myfile = fopen(''.$_userId.'.txt', "w+") or die("Unable to open file!");
-  fwrite($myfile, $_msg);
-  fclose($myfile);
-} else {
-  $myfile = fopen(''.$_userId.'.txt', "x+") or die("Unable to open file!");
-  fwrite($myfile, $_msg);
-  fclose($myfile);
-}
 $_last = file(''.$_userId.'.txt');
 $api_key="raGvU0tka_kLPSFwL7ObSQKwZGR-91G2";
 $url = 'https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'';
@@ -90,4 +81,14 @@ curl_setopt($channel, CURLOPT_RETURNTRANSFER,true);
 curl_setopt($channel, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($channel);
 curl_close ($channel);
+sleep(3);
+if (file_exists($filename)) {
+  $myfile = fopen(''.$_userId.'.txt', "w+") or die("Unable to open file!");
+  fwrite($myfile, $_msg);
+  fclose($myfile);
+} else {
+  $myfile = fopen(''.$_userId.'.txt', "x+") or die("Unable to open file!");
+  fwrite($myfile, $_msg);
+  fclose($myfile);
+}
 ?>
