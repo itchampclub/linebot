@@ -27,7 +27,9 @@ if (strpos($_msg, '@') !== false) {
     $newData = json_encode(
       array(
         'question' => $_question,
+          'value' => "1",
         'answer'=> $_answer
+          
       )
     );
     $opts = array(
