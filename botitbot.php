@@ -19,11 +19,9 @@ if (file_exists($filename)) {
 } else {
   $myfile = fopen(''.$_userId.'.txt', "x+") or die("Unable to open file!");
   fwrite($myfile, $_msg);
+  $_last =  fread($myfile,filesize(''.$_userId.'.txt'));
   fclose($myfile);
 }
-
-$myfile = fopen(''.$_userId.'.txt', "w+") or die("Unable to open file!");
-$_last =  fread($myfile,filesize(''.$_userId.'.txt'));
 fclose($myfile);
 $api_key="raGvU0tka_kLPSFwL7ObSQKwZGR-91G2";
 $url = 'https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'';
