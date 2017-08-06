@@ -79,10 +79,22 @@ if (strpos($_msg, '@') !== false) {
     $returnValue = file_get_contents($url,false,$context);
    }
   }else{
-    $arrPostData = array();
-    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'บอทไม่รู้ วิธีสอนพิมพ์: @คำถาม&คำตอบ';
+        $newData = json_encode(
+      array(
+        'question' => $_msg,
+        'answer' => $_msg,
+        'value' => $_msgm
+      )
+    );
+    $opts = array(
+      'http' => array(
+          'method' => "POST",
+          'header' => "Content-type: application/json",
+          'content' => $newData
+       )
+    );
+    $context = stream_context_create($opts);
+    $returnValue = file_get_contents($url,false,$context);
   }
 }
 
