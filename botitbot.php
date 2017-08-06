@@ -33,7 +33,7 @@ if (strpos($_msg) !== false) {
     $pieces = explode("", $x_tra);
     $_question=str_replace("","",$pieces[0]);
     $_answer=str_replace("","",$pieces[1]);
-    
+
 if ($mode = 1) {
     $newData = json_encode(
       array(
@@ -42,7 +42,7 @@ if ($mode = 1) {
     );
     $opts = array(
       'http' => array(
-          'method' => "PUT",
+          'method' => "POST",
           'header' => "Content-type: application/json",
           'content' => $newData
        )
@@ -62,7 +62,7 @@ if ($mode = 1) {
     );
     $opts = array(
       'http' => array(
-          'method' => "PUT",
+          'method' => "POST",
           'header' => "Content-type: application/json",
           'content' => $newData
        )
