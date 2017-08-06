@@ -57,6 +57,7 @@ if (strpos($_msg, '@') !== false) {
   }else{
         $newData = json_encode(
       array(
+           'value' => "1",
         'question' => $_last,
         'answer' => $_msg,
       )
