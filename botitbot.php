@@ -19,10 +19,9 @@ if (file_exists($filename)) {
 } else {
   $myfile = fopen(''.$_userId.'.txt', "x+") or die("Unable to open file!");
   fwrite($myfile, $_msg);
-  $_last =  fread($myfile,filesize(''.$_userId.'.txt'));
   fclose($myfile);
 }
-fclose($myfile);
+
 $api_key="raGvU0tka_kLPSFwL7ObSQKwZGR-91G2";
 $url = 'https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'';
 $json = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
@@ -57,6 +56,9 @@ if (strpos($_msg, '@') !== false) {
 }else{
   if($isData >0){
    foreach($data as $rec){
+
+     $myfile = fopen(''.$_userId.'.txt', "r") or die("Unable to open file!");
+     $_last = fread($myfile,filesize("webdictionary.txt"));
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
@@ -81,7 +83,7 @@ if (strpos($_msg, '@') !== false) {
   }
 }
 
-
+fclose($myfile);
 $channel = curl_init();
 curl_setopt($channel, CURLOPT_URL,$strUrl);
 curl_setopt($channel, CURLOPT_HEADER, false);
