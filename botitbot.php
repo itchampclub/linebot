@@ -22,7 +22,7 @@ if (file_exists($filename)) {
   fclose($myfile);
 }
 
-
+$_last =  fread($myfile,filesize(''.$_userId.'.txt'));
 $api_key="raGvU0tka_kLPSFwL7ObSQKwZGR-91G2";
 $url = 'https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'';
 $json = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
@@ -61,29 +61,12 @@ if (strpos($_msg, '@') !== false) {
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
     $arrPostData['messages'][0]['text'] = $rec->answer;
-
-        $newData = json_encode(
-      array(
-        'question' => $rec->answer,
-        'answer'=> $_msg
-      )
-    );
-    $opts = array(
-      'http' => array(
-          'method' => "POST",
-          'header' => "Content-type: application/json",
-          'content' => $newData
-       )
-    );
-    $context = stream_context_create($opts);
-    $returnValue = file_get_contents($url,false,$context);
    }
   }else{
         $newData = json_encode(
       array(
-        'question' => $_msg,
+        'question' => $_last,
         'answer' => $_msg,
-        'value' => $_msgm
       )
     );
     $opts = array(
