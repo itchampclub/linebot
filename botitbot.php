@@ -28,9 +28,9 @@ $url = 'https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.
 $json = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
 $data = json_decode($json);
 $isData=sizeof($data);
-if (strpos($_msg, '@') !== false) {
-    $x_tra = str_replace("@","", $_msg);
-    $pieces = explode("&", $x_tra);
+if (strpos($_msg) !== false) {
+    $x_tra = str_replace("","", $_msg);
+    $pieces = explode("", $x_tra);
     $_question=str_replace("","",$pieces[0]);
     $_answer=str_replace("","",$pieces[1]);
     //Post New Data
@@ -54,70 +54,6 @@ if (strpos($_msg, '@') !== false) {
     $arrPostData['messages'][0]['type'] = "text";
     $arrPostData['messages'][0]['text'] = 'รับทราบจ้า';
 }else{
-  if (strpos($_msg, '#') !== false) {
-    $x_tra = str_replace("#", $_msg);
-    //Post New Data
-    $newData = json_encode(
-      array(
-        'mode' => $x_tra,
-      )
-    );
-    $opts = array(
-      'http' => array(
-          'method' => "POST",
-          'header' => "Content-type: application/json",
-          'content' => $newData
-       )
-    );
-    $context = stream_context_create($opts);
-    $returnValue = file_get_contents($url,false,$context);
-    $arrPostData = array();
-    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'เปลี่ยนโหมด';
-  } else {
-if ($mode = 1) {
-        $_question = $_msg
-        $newData = json_encode(
-      array(
-        'question' => $_question,
-      )
-    );
-    $opts = array(
-      'http' => array(
-          'method' => "POST",
-          'header' => "Content-type: application/json",
-          'content' => $newData
-       )
-    );
-    $context = stream_context_create($opts);
-    $returnValue = file_get_contents($url,false,$context);
-    $arrPostData = array();
-    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'เรียนรู้คำถาม';
-  } else {
-    if ($mode = 2) {
-        $_answer = $_msg
-        $newData = json_encode(
-      array(
-        'answer' => $_answer,
-      )
-    );
-    $opts = array(
-      'http' => array(
-          'method' => "POST",
-          'header' => "Content-type: application/json",
-          'content' => $newData
-       )
-    );
-    $context = stream_context_create($opts);
-    $returnValue = file_get_contents($url,false,$context);
-    $arrPostData = array();
-    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'เรียนรู้คำถาม';
-    } else {
   if($isData >0){
    foreach($data as $rec){
     $arrPostData = array();
@@ -130,9 +66,6 @@ if ($mode = 1) {
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
     $arrPostData['messages'][0]['text'] = 'บอทไม่รู้ วิธีสอนพิมพ์: @คำถาม&คำตอบ';
-  }
-  }
-    }
   }
 }
 
