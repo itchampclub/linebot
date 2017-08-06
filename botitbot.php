@@ -33,16 +33,16 @@ if (strpos($_msg) !== false) {
     $pieces = explode("", $x_tra);
     $_question=str_replace("","",$pieces[0]);
     $_answer=str_replace("","",$pieces[1]);
-    //Post New Data
+    
+if ($mode = 1) {
     $newData = json_encode(
       array(
         'question' => $_msg,
-        'answer'=> $_msg
       )
     );
     $opts = array(
       'http' => array(
-          'method' => "POST",
+          'method' => "PUT",
           'header' => "Content-type: application/json",
           'content' => $newData
        )
@@ -52,7 +52,31 @@ if (strpos($_msg) !== false) {
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'รับทราบจ้า';
+    $arrPostData['messages'][0]['text'] = 'modeQ';
+} else {
+  if ($mode = 2) {
+    $newData = json_encode(
+      array(
+        'answer'=> $_msg
+      )
+    );
+    $opts = array(
+      'http' => array(
+          'method' => "PUT",
+          'header' => "Content-type: application/json",
+          'content' => $newData
+       )
+    );
+    $context = stream_context_create($opts);
+    $returnValue = file_get_contents($url,false,$context);
+    $arrPostData = array();
+    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+    $arrPostData['messages'][0]['type'] = "text";
+    $arrPostData['messages'][0]['text'] = 'modeA';
+  } else {
+  }
+}
+
 }else{
   if($isData >0){
    foreach($data as $rec){
