@@ -36,8 +36,8 @@ if (strpos($_msg) !== false) {
     //Post New Data
     $newData = json_encode(
       array(
-        'question' => $_question,
-        'answer'=> $_answer
+        'question' => $_msg,
+        'answer'=> $_msg
       )
     );
     $opts = array(
