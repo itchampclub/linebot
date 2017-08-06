@@ -22,22 +22,22 @@ if (file_exists($filename)) {
   fclose($myfile);
 }
 
-$mode = 2
+
 $api_key="raGvU0tka_kLPSFwL7ObSQKwZGR-91G2";
 $url = 'https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'';
 $json = file_get_contents('https://api.mlab.com/api/1/databases/byone/collections/linebot?apiKey='.$api_key.'&q={"question":"'.$_msg.'"}');
 $data = json_decode($json);
 $isData=sizeof($data);
-if (strpos($_msg) !== false) {
-    $x_tra = str_replace("","", $_msg);
-    $pieces = explode("", $x_tra);
+if (strpos($_msg, '@') !== false) {
+    $x_tra = str_replace("@","", $_msg);
+    $pieces = explode("&", $x_tra);
     $_question=str_replace("","",$pieces[0]);
     $_answer=str_replace("","",$pieces[1]);
-
-if ($mode = 1) {
+    //Post New Data
     $newData = json_encode(
       array(
-        'question' => $_msg,
+        'question' => $_question,
+        'answer'=> $_answer
       )
     );
     $opts = array(
@@ -49,14 +49,22 @@ if ($mode = 1) {
     );
     $context = stream_context_create($opts);
     $returnValue = file_get_contents($url,false,$context);
+
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'modeQ';
-} else {
-  if ($mode = 2) {
-    $newData = json_encode(
+    $arrPostData['messages'][0]['text'] = 'รับทราบจ้า';
+}else{
+  if($isData >0){
+   foreach($data as $rec){
+    $arrPostData = array();
+    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+    $arrPostData['messages'][0]['type'] = "text";
+    $arrPostData['messages'][0]['text'] = $rec->answer;
+
+        $newData = json_encode(
       array(
+        'question' => $rec->answer,
         'answer'=> $_msg
       )
     );
@@ -69,21 +77,6 @@ if ($mode = 1) {
     );
     $context = stream_context_create($opts);
     $returnValue = file_get_contents($url,false,$context);
-    $arrPostData = array();
-    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = 'modeA';
-  } else {
-  }
-}
-
-}else{
-  if($isData >0){
-   foreach($data as $rec){
-    $arrPostData = array();
-    $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
-    $arrPostData['messages'][0]['type'] = "text";
-    $arrPostData['messages'][0]['text'] = $rec->answer;
    }
   }else{
     $arrPostData = array();
