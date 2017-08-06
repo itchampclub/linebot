@@ -58,7 +58,7 @@ if (strpos($_msg, '@') !== false) {
    foreach($data as $rec){
 
      $myfile = fopen(''.$_userId.'.txt', "r") or die("Unable to open file!");
-     $_last = fread($myfile,filesize("webdictionary.txt"));
+     $_last = fread($myfile,filesize(''.$_userId.'.txt'));
     $arrPostData = array();
     $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
     $arrPostData['messages'][0]['type'] = "text";
